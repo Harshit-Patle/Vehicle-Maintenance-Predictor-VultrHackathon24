@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './App.css';
 import VehicleForm from './Components/VehicleForm';
 
 function App() {
