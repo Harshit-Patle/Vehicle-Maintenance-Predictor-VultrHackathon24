@@ -12,6 +12,10 @@ function App() {
       <main className="main-content">
         <VehicleForm />
       </main>
+      <footer className="footer">
+        <p>© {new Date().getFullYear()} All rights reserved to <a href="https://www.linkedin.com/in/harshit-patle" target="_blank" rel="noopener noreferrer">Harshit Patle</a>.</p>
+      </footer>
+
     </div>
   );
 }
