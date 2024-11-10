@@ -3,37 +3,29 @@ name: Deploy to Vultr
 on:
   push:
     branches:
-      - main  # Trigger the action when pushing to the 'main' branch
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Checks out the code from your GitHub repo
+        uses: actions/checkout@v2
 
-      - name: Set up SSH key for deployment
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm run build
+
+      - name: Deploy to server
+        run: |
+          scp -r ./dist/* root@65.20.70.107:/vehicle-maintenance-predictor/dist
         env:
-          VULTR_PRIVATE_KEY: ${{ secrets.VULTR_PRIVATE_KEY }}  # Use the secret private key
-        run: |
-          # Create the .ssh directory
-          mkdir -p ~/.ssh
-          
-          # Write the private SSH key to a file
-          echo "${{ secrets.VULTR_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519  # Set proper permissions
-
-          # Add the Vultr server to known_hosts (to avoid SSH fingerprint warnings)
-          ssh-keyscan -H 65.20.73.210 >> ~/.ssh/known_hosts  # Replace with your Vultr IP
-
-      - name: Build the React app
-        run: |
-          # Install dependencies and build the Vite app for production
-          npm ci  # Use npm ci for a clean install of dependencies
-          npm run build  # Build the React app
-
-      - name: Deploy to Vultr
-        run: |
-          # Use SCP to copy the built files to your Vultr server
-          scp -r dist/* root@65.20.73.210:/var/www/html  # Replace with your server IP and path
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
