@@ -3,7 +3,8 @@ name: Deploy to Vultr
 on:
   push:
     branches:
-      - master
+      - main
+      - develop  # Include any other branches you want to auto-deploy from
 
 jobs:
   deploy:
