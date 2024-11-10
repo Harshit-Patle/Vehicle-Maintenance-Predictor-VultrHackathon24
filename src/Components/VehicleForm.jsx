@@ -11,7 +11,7 @@ const VehicleForm = () => {
 
     const [response, setResponse] = useState(null);
     const [loading, setLoading] = useState(false);
-    const googleApiKey = import.meta.env.VITE_API_KEY;
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -58,7 +58,7 @@ const VehicleForm = () => {
             ],
         };
 
-        fetch(`${googleApiKey}`, {
+        fetch(`${apiUrl}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
