@@ -21,7 +21,7 @@ jobs:
           mkdir -p ~/.ssh
           
           # Write the private SSH key to a file
-          echo "$VULTR_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          echo "${{ secrets.VULTR_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519  # Set proper permissions
 
           # Add the Vultr server to known_hosts (to avoid SSH fingerprint warnings)
@@ -30,7 +30,7 @@ jobs:
       - name: Build the React app
         run: |
           # Install dependencies and build the Vite app for production
-          npm install  # Or `yarn` if you are using Yarn
+          npm ci  # Use npm ci for a clean install of dependencies
           npm run build  # Build the React app
 
       - name: Deploy to Vultr
