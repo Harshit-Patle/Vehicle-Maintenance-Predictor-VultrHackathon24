@@ -3,50 +3,37 @@ name: Deploy to Vultr
 on:
   push:
     branches:
-      - main  # Trigger on push to the 'main' branch
+      - main  # Trigger the action when you push to the 'main' branch
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3  # Check out the code from your GitHub repository
 
       - name: Set up SSH key for deployment
         env:
-          VULTR_PRIVATE_KEY: ${{ secrets.VULTR_PRIVATE_KEY }}
+          VULTR_PRIVATE_KEY: ${{ secrets.VULTR_PRIVATE_KEY }}  # Get the private key from GitHub secrets
         run: |
-          # Create the .ssh directory if it doesn't exist
+          # Create the .ssh directory
           mkdir -p ~/.ssh
 
-          # Save the private SSH key to a file
+          # Write the private SSH key to a file
           echo "$VULTR_PRIVATE_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519  # Secure the private key
+          chmod 600 ~/.ssh/id_ed25519  # Set proper permissions for the key
 
-          # Add the Vultr server's SSH fingerprint to known_hosts to avoid warnings
-          ssh-keyscan -H 65.20.85.5 >> ~/.ssh/known_hosts  # Replace with your Vultr server IP
+          # Add the Vultr server to known_hosts to avoid SSH fingerprint warnings
+          ssh-keyscan -H your_vultr_server_ip >> ~/.ssh/known_hosts  # Replace with your Vultr server IP
 
-<<<<<<< HEAD
-      - name: Display known hosts (for debugging)
+      - name: Build the React app
         run: |
-=======
-      - name: Display SSH configuration (for debugging)
-        run: |
-          echo "Displaying SSH config..."
-          cat ~/.ssh/config
->>>>>>> 221b273347ce85798edd4004cb628b9f8756d1f1
-          echo "Displaying known hosts..."
-          cat ~/.ssh/known_hosts
-
-      - name: Check dist folder (for debugging)
-        run: |
-          # Debugging the dist folder before deploying
-          echo "Checking if dist/ folder exists"
-          ls dist/  # Make sure dist folder exists and is not empty
+          # Install dependencies and build the React app using Vite
+          npm install  # Or `yarn` if you're using Yarn
+          npm run build  # Build the React app for production
 
       - name: Deploy to Vultr
         run: |
-          # Debugging SCP command before deployment
-          echo "Deploying files..."
-          scp -r dist/* root@65.20.85.5:/var/www/html  # Replace with your Vultr server IP and directory
+          # Deploy the build folder to your Vultr server using SCP (secure copy)
+          scp -r dist/* root@your_vultr_server_ip:/var/www/html  # Replace with your Vultr server IP and directory
