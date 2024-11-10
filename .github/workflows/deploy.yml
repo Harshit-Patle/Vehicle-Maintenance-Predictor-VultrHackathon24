@@ -3,7 +3,7 @@ name: Deploy to Vultr
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -11,18 +11,23 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Updated to v3
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3  # Updated to v3
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'  # Set the Node.js version you want to use
+          node-version: '18'
 
       - name: Install dependencies
         run: npm install
 
       - name: Build the app
         run: npm run build
+
+      - name: Add SSH key to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H 65.20.70.107 >> ~/.ssh/known_hosts
 
       - name: Deploy to server
         run: |
