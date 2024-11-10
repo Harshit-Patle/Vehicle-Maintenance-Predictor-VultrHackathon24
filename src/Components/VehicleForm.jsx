@@ -58,7 +58,7 @@ const VehicleForm = () => {
             ],
         };
 
-        fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${googleApiKey}`, {
+        fetch(`${googleApiKey}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
