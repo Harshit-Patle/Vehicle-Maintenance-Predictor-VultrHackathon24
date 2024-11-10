@@ -27,8 +27,15 @@ jobs:
           # Add the Vultr server's SSH fingerprint to known_hosts to avoid warnings
           ssh-keyscan -H 65.20.85.5 >> ~/.ssh/known_hosts  # Replace with your Vultr server IP
 
+<<<<<<< HEAD
       - name: Display known hosts (for debugging)
         run: |
+=======
+      - name: Display SSH configuration (for debugging)
+        run: |
+          echo "Displaying SSH config..."
+          cat ~/.ssh/config
+>>>>>>> 221b273347ce85798edd4004cb628b9f8756d1f1
           echo "Displaying known hosts..."
           cat ~/.ssh/known_hosts
 
