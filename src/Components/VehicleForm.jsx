@@ -11,7 +11,6 @@ const VehicleForm = () => {
 
     const [response, setResponse] = useState(null);
     const [loading, setLoading] = useState(false);
-    const apiUrl = import.meta.env.VITE_API_URL;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -23,7 +22,7 @@ const VehicleForm = () => {
 
     const formatResponseText = (text) => {
         return text.split('* **').map((part, index) => {
-            if (index === 0) return part; 
+            if (index === 0) return part;
             const [title, ...rest] = part.split(':');
             return (
                 <p key={index}>
@@ -36,7 +35,7 @@ const VehicleForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
-        setResponse(null); 
+        setResponse(null);
 
         const requestData = {
             contents: [
@@ -58,7 +57,7 @@ const VehicleForm = () => {
             ],
         };
 
-        fetch(`${apiUrl}`, {
+        fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyAxnPJ2yxVqS99vlqDoevbjmRLvGjT_aQA`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
