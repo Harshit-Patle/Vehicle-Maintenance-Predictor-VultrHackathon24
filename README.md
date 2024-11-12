@@ -27,8 +27,8 @@ Using the **Google Gemini API**, the app processes vehicle data to generate main
 
 ## Links
 
-- **YouTube**: [Coding Version](https://www.youtube.com/@coding_version)
-- **Live App**: [Vehicle Maintenance Predictor](https://shorturl.at/XDFC0)
+- **LinkedIn**: [Harshit Patle](https://www.linkedin.com/in/harshit-patle)
+- **YouTube Channel**: [Coding Version](https://www.youtube.com/@coding_version)
 
 ## Acknowledgements
 
