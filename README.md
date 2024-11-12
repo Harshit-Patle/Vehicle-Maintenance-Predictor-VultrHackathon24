@@ -30,6 +30,7 @@ The app utilizes an AI model (via the **Google Gemini API**) to process vehicle 
 
 - **LinkedIn**: [Harshit Patle](https://www.linkedin.com/in/harshit-patle)
 - **YouTube Channel**: [Coding Version](https://www.youtube.com/@coding_version)
+- **Live WebApp**: [Vehicle Maintenance Predictor](https://shorturl.at/XDFC0)
 
 ## Acknowledgements
 
